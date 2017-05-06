@@ -1,0 +1,21 @@
+﻿@model List<SaafiSystems.Models.Revenue>
+<h1>Current Loads</h1>
+
+@if (Model.Count == 0)
+{
+    <p> No Revenue entries yet Processed Yet!</p>
+}
+
+<h1>@ViewBag.title</h1>
+
+<form method="post">
+
+    @foreach (var load in Model)
+    {
+        <input type="checkbox" name="cheeseIds" id="@load.ID" value="@load.ID" />
+        <label for="@load.ID">@load.Date</label>
+        <br />
+    }
+
+    <input type="submit" value="Remove Selected Load(s)" />
+</form>
