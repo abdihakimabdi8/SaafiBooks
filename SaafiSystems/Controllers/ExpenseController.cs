@@ -69,32 +69,7 @@ namespace SaafiSystems.Controllers
             return View(addExpenseViewModel);
         }
 
-        public IActionResult Remove(int ID)
-        {
-            var exp = context.Expenses.Single(e => e.ID == ID);
-            if (exp != null)
-                context.Expenses.Remove(exp);
-
-            context.SaveChanges();
-
-            return Redirect("/Expense");
-
        
-        }
-
-        [HttpPost]
-        public IActionResult Remove(int[] expenseIds)
-        {
-            foreach (int expenseId in expenseIds)
-            {
-                Revenue theRevenue = context.Revenues.Single(c => c.ID == expenseId);
-                context.Revenues.Remove(theRevenue);
-            }
-
-            context.SaveChanges();
-
-            return Redirect("/Expense");
-        }
         [HttpPost]
         public IActionResult Category(int id)
         {
@@ -114,7 +89,7 @@ namespace SaafiSystems.Controllers
              .ToList();*/
 
             ViewBag.Title = "Expenses in Category" + theCategory.Name;
-            return View("Index", theCategory.Expenses);
+            return View(theCategory.Expenses);
         }
       
         public ViewResult Search(string searchString)

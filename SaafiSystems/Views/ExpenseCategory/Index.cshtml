@@ -35,8 +35,8 @@
         {
 
             <tr>
-                <td><a asp-controller="Expense" asp-route-id="@expenseCategory.ID">@expenseCategory.ID</a></td>
-                <td><a asp-controller="Expense" asp-route-id="@expenseCategory.ID">@expenseCategory.Name</a></td>
+                <td><a asp-controller="ExpenseCategory" asp-action="category" asp-route-id="@expenseCategory.ID">@expenseCategory.ID</a></td>
+                <td><a asp-controller="ExpenseCategory"  asp-action="category" asp-route-id="@expenseCategory.ID">@expenseCategory.Name</a></td>
                 <td>
                <a href="/expensecategory/edit/@expenseCategory.ID" class="btn btn-info btn-xs">Edit</a>
                     @*@*<input type="checkbox" name="expenseIds" id="@expense.ID" value="@expense.ID" class="btn btn-danger btn-sm" />*@

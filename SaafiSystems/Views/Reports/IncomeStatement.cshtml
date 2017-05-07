@@ -1,0 +1,29 @@
+﻿
+
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<div>
+    <form asp-controller="Reports" asp-action="Index" class="navbar-form navbar-left" role="search" method="get">
+        <div class="form-group">
+            <p>
+                <input type="text" name="searchString" class="form-control" placeholder="Search your trips, loads and more" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-group-xs " />
+            </p>
+        </div>
+
+    </form>
+    <div style="border-bottom: 3px solid #e8e8e8; padding-bottom: 9px; margin: 40px 0 20px; display: block; color: #595952; font-size: 34px;line-height: 1.42857143; box-sizing: border-box;">
+        All Reports
+    </div>
+</div>
+
+<br />
+<form asp-controller="Owner" asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <input type="submit" class="hidden-xs btn btn-success" value=" + Submit New Owner" />
+
+</form>

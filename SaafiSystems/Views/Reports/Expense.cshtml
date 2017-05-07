@@ -1,5 +1,6 @@
-﻿@model SaafiSystems.ViewModels.ViewOwnerViewModel
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+﻿@model SaafiSystems.ViewModels.ExpenseReportViewModel
+
+
 <div class="page-header" style="background:white">
     <h1 style=" font-size: 21px;color: #0b131d; font-weight: 400;font-size: 21px;margin-top: 20px;margin-bottom: 10px;font-family: inherit;font-weight: 400;line-height: 1.1;color: inherit;margin: .67em 0; font-size: 2em; box-sizing: border-box;display: block;font-size: 2em; font-weight: bold;">
 
@@ -19,10 +20,10 @@
 
                 <td style="padding: 8px;line-height: 1.42857143;vertical-align: top; border-top: 1px solid #ddd;">
                     <div class="form-group">
-                        <label asp-for="OwnerID">
+                        @*<label asp-for="OwnerID">
                             <select asp-for="OwnerID" asp-items="Model.Owners"></select>
                             <span asp-validation-for="OwnerID"></span>
-                        </label>
+                        </label>*@
 
                     </div>
 
@@ -39,5 +40,100 @@
 
 
 
+<form role="form", class="form-inline" asp-controller="expense" asp-action="index" method="get">
+
+<input type="hidden" value="" />
+    <span class="period-selector">
+        Period:
+        <select class="form-control" >
+
+        </select>
+        Year:
+        <select class="form-control">
+            <option value="2017" selected="selected">2017</option>
+        </select>
+    </span>
+
+</form>
+
+</div>
 
 
+<table class="reports">
+  
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="2">May 2017</th>
+            <th></th>
+            <th></th>
+            <th colspan="2">YTD 2017</th>
+        </tr>
+       
+        <tr>
+            <th></th>
+            <th></th>
+            <th ><strong>Amount</strong></th>
+            <th style="text-align: right">C.P.M</th>
+            <th>%of Expense</th>
+            <th></th>
+            <th><strong>Amount</strong></th>
+            <th style="text-align: right">C.P.M</th>
+            <th>%of Expense</th>
+            <th></th>
+        </tr><br />
+
+@foreach (var expenseCategory in Model.ExpenseCategories)
+{
+        <tr>
+            <td class="left" colspan="5" style="color: maroon; border-bottom: 2px solid maroon; text-align: left; padding: 5px;  font-family: -apple-system; font-weight: 400; display: table-cell;vertical-align: inherit;   box-sizing: border-box;  border-collapse: collapse;">
+                <strong>@expenseCategory.Name</strong>
+            </td>
+            <td class="ytd" colspan="5" style="color: maroon; border-bottom: 2px solid maroon; text-align: left; padding: 5px;  font-family: -apple-system; font-weight: 400; display: table-cell;vertical-align: inherit;   box-sizing: border-box;  border-collapse: collapse;">
+                <strong></strong>
+            </td>
+            
+        </tr>
+        <br />
+       
+            @foreach (var expense in Model.TotalExpense)
+            {
+
+                
+                    @if (expenseCategory == expense.ExpenseCategory)
+                    {
+                        <tr>
+                            <td class="=left">Uncategorized</td>
+                            <td>@expense.Amount</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="=ytd"></td>
+                            <td class="=ytd"></td>
+                            <td class="=ytd"></td>
+                            <td class="=ytd"></td>
+                        </tr>
+        <tr>
+            <td colspan="5"></td>
+            <td colspan="5" class="ytd"></td>
+        </tr>
+
+        <tr>
+            <td class="left"> <strong>Expense Totals</strong></td>
+            <td class="total"></td>
+            <td class="total"> <strong>4545</strong></td>
+            <td class="total"> <strong>4545</strong></td>
+            <td class="total"> <strong>4545</strong></td>
+            <td class="ytd"></td>
+            <td class="ytd"> <strong>4545</strong></td>
+            <td class="ytd"> <strong>4545</strong></td>
+            <td class="ytd"> <strong>4545</strong></td>
+        </tr>
+}
+                    Console.WriteLine("");
+
+            }
+}
+ 
+    <td>@Model.TotalExpense</td>
+</table>

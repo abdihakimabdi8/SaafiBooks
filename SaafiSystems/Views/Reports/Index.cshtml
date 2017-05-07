@@ -6,7 +6,7 @@
     ViewBag.Title = "Loads";
 }
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
+<div>
 <form asp-controller="Reports" asp-action="Index" class="navbar-form navbar-left" role="search" method="get">
     <div class="form-group">
         <p>
@@ -14,17 +14,17 @@
             <input type="submit" value="Search" class="btn btn-group-xs " />
         </p>
     </div>
+    
 </form>
-
-  
-
-
-<div style="border-bottom: 3px solid #e8e8e8; padding-bottom: 9px;
-    margin: 40px 0 20px; display: block; color: #595952; font-size: 34px;
-    line-height: 1.42857143; box-sizing: border-box;">
+<div style="border-bottom: 3px solid #e8e8e8; padding-bottom: 9px; margin: 40px 0 20px; display: block; color: #595952; font-size: 34px;line-height: 1.42857143; box-sizing: border-box;">
     All Reports
 </div>
-<table class="table table-striped">
+    </div>
+  
+<br />
+
+
+@*<table class="table table-striped">
     <thead>
         <tr>
             <th>Date</th>
@@ -76,12 +76,33 @@
 </tr>
         }
 
-</table>
+</table>*@
+
+
+<strong style=" color: #0090df;color: #337ab7; text-decoration: none;background-color: transparent; box-sizing: border-box; color: -webkit-link;  cursor: auto; font-weight: bold;    font-weight: bold; font-size: 18px; line-height: 2;     box-sizing: border-box;">
+
+
+    <a a asp-controller="Reports" asp-action="IncomeStatement">
+        Profit and Loss
+    </a><br />
+    <a a asp-controller="Reports" asp-action="Revenue">
+        Revenue Report
+    </a><br />
+    <a asp-controller="Reports" asp-action="expense">
+        Expense Report
+    </a><br />
+    <a>
+        Fuel Mileage
+    </a><br />
+    <a>
+        IFTA Report
+    </a><br />
+</strong>
+
 @{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
-
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-page="@(Model.PageIndex - 1)"
@@ -97,20 +118,3 @@
     Next
 </a>
 </br>
-
-<strong style=" color: #0090df;color: #337ab7; text-decoration: none;background-color: transparent; box-sizing: border-box; color: -webkit-link;  cursor: auto; font-weight: bold;    font-weight: bold; font-size: 18px; line-height: 2;     box-sizing: border-box;">
-
-
-    <a>
-        Profit and Loss
-    </a><br />
-    <a asp-controller="Reports" asp-action="expense">
-        Expense Report
-    </a><br />
-    <a>
-        Fuel Mileage
-    </a><br />
-    <a>
-        IFTA Report
-    </a><br />
-</strong>

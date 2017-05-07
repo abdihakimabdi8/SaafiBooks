@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using PagedList;
 using PagedList.Core;
 using SaafiSystems.Models.MonthlyRevenueViewModel;
+using SaafiSystems.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -101,7 +102,40 @@ namespace SaafiSystems.Controllers
             return View(await data.AsNoTracking().ToListAsync());
         }
 
+        public async Task<IActionResult> Expense(int? page)
+        {
+            IList<Expense> totalExpense = new List<Expense>();
+            List<Expense> expenseItems = context.
+               Expenses
+               .Include(item => item.ExpenseCategory)
+               .ToList();
+            IList<ExpenseCategory> expenseCategories = context.ExpenseCategories.ToList();
 
+            foreach (var item in expenseItems)
+            {
+             
+                totalExpense.Add(item);
+
+            };
+            ExpenseReportViewModel viewModel = new ExpenseReportViewModel
+            {
+
+                ExpenseCategories = expenseCategories,
+                Expenses = expenseItems,
+                TotalExpense = totalExpense
+            };
+   
+            return View(viewModel);
+            // ViewBag.Title = "Expenses in Category" + theCategory.Name;
+
+            //var theCategorys = from eCat in context.ExpenseCategories.Include(cat => cat.Expenses)
+
+            //                   select eCat;
+            // return View(await PaginatedList<ExpenseCategory>.CreateAsync(theCategorys.AsNoTracking(), page ?? 1, pageSize));
+
+            int pageSize = 3;
+
+        }
 
     }
 }

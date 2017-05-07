@@ -8,9 +8,10 @@ using SaafiSystems.Data;
 namespace SaafiSystems.Migrations
 {
     [DbContext(typeof(SaafiDbContext))]
-    partial class SaafiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170506074817_AddOwnerMore")]
+    partial class AddOwnerMore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

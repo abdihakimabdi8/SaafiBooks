@@ -82,5 +82,35 @@ namespace SaafiSystems.Controllers
 
             return Redirect("/ExpenseCategory");
         }
+
+
+        //    [HttpPost]
+        public async Task<IActionResult>Category(int id, int? page)
+        {
+            if (id == 0)
+            {
+                Redirect("/Category");
+            }
+
+            ExpenseCategory theCategory = context.ExpenseCategories
+                .Include(cat => cat.Expenses)
+                .Single(cat => cat.ID == id);
+
+            /* 
+             * IList<Cheese> theCheese = Context.Cheeses
+             * .Include(c => c.Category)
+             * .Single(c => c.CategoryID ==id)
+             .ToList();*/
+
+            ViewBag.Title = "Expenses in Category" + theCategory.Name;
+
+            //var theCategorys = from eCat in context.ExpenseCategories.Include(cat => cat.Expenses)
+                               
+            //                   select eCat;
+                                    
+            int pageSize = 3;
+           // return View(await PaginatedList<ExpenseCategory>.CreateAsync(theCategorys.AsNoTracking(), page ?? 1, pageSize));
+        return View(theCategory.Expenses);
+        }
     }
 }

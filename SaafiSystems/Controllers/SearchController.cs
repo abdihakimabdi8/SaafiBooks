@@ -25,7 +25,8 @@ namespace SaafiSystems.Controllers
         }
 
         // GET: Reports
-        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
+
         {
 
             ViewData["CurrentSort"] = sortOrder;
@@ -56,7 +57,8 @@ namespace SaafiSystems.Controllers
             else
             {
                 searchString = currentFilter;
-            }
+            }
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 loads = loads.Where(l => l.Date.ToString().Contains(searchString) || l.Reference.Contains(searchString) || l.Owner.ToUpper().Contains(searchString.ToUpper()) || l.Description.ToUpper().Contains(searchString.ToUpper()) || l.LoadCategory.ToString().Contains(searchString));
