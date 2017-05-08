@@ -1,0 +1,135 @@
+﻿@model SaafiSystems.ViewModels.RevenueReportViewModel
+
+<div class="page-header" style="background:white">
+    <h1 style=" font-size: 21px;color: #0b131d; font-weight: 400;font-size: 21px;margin-top: 20px;margin-bottom: 10px;font-family: inherit;font-weight: 400;line-height: 1.1;color: inherit;margin: .67em 0; font-size: 2em; box-sizing: border-box;display: block;font-size: 2em; font-weight: bold;">
+        <a asp-controller="Load">
+           Revenue By Category
+        </a>
+
+        <a asp-controller="LoadCategory" asp-action="Add" class="hidden-xs btn btn-primary pull-right">+ Add Category</a> <a asp-controller="LoadCategory" asp-action="Add" class="visible-xs-block mobile-add btn-block btn btn-success">+ Add Category</a>
+        <a asp-controller="Load" asp-action="Add" class="hidden-xs btn btn-success pull-right">+ New Load Entry</a> <a asp-controller="Load" asp-action="Add" class="visible-xs-block mobile-add btn-block btn btn-success">+ New Load Entry</a>
+    </h1>
+</div>
+
+<form role="form" , class="form-inline" asp-controller="expense" asp-action="index" method="get">
+
+    <input type="hidden" value="" />
+    <span class="period-selector">
+        Period:
+        <select class="form-control"></select>
+        Year:
+        <select class="form-control">
+            <option value="2017" selected="selected">2017</option>
+        </select>
+    </span>
+
+</form>
+
+</div>
+
+
+<table class="table-hover" style=" border-collapse: collapse; margin: auto;">
+
+    <tr>
+        <th></th>
+        <th style="background: white;    padding: 5px; font-weight: bold; text-align: center;"></th>
+        <th style="background: white;    padding: 5px; font-weight: bold; text-align: center;"></th>
+        <th style="background: white;     padding: 5px; font-weight: bold; text-align: center;"></th>
+
+        <th colspan="2" style="background: white;     padding: 5px; font-weight: bold; text-align: left;">May 2017</th>
+
+
+        <th style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;"></th>
+        <th style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;"></th>
+
+        <th colspan="2" style="background: #EEE;    padding: 5px; font-weight: bold; text-align: left;">YTD 2017</th>
+        <td style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;"></td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th style="background:  white;   padding: 5px; font-weight: bold; text-align: center;"></th>
+
+        <th style="background:  white;   padding: 5px; font-weight: bold; text-align: center;"></th>
+        <th style="background:  white;   padding: 5px; font-weight: bold; text-align: center;"><strong>Amount</strong></th>
+        <th style="background:  white;   padding: 5px; font-weight: bold; text-align: center;text-align: right">C.P.M</th>
+        <th style="background:  white;   padding: 5px; font-weight: bold; text-align: center;">%of Expense</th>
+
+
+        <th style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;"><strong>Amount</strong></th>
+        <th style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;text-align: right">C.P.M</th>
+        <th style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;">%of Expense</th>
+        <th style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;"></th>
+        <th style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;"></th>
+    </tr>
+
+    @foreach (var loadCategory in Model.LoadCategories)
+            {
+        <tr>
+            <td class="left" colspan="5" style="color: maroon; border-bottom: 2px solid maroon; text-align: left; padding: 5px;  font-family: -apple-system; font-weight: 400; display: table-cell;vertical-align: inherit;   box-sizing: border-box;  border-collapse: collapse;">
+                <strong>@loadCategory.Name</strong>
+            </td>
+            <td class="left" style="color: maroon; border-bottom: 2px solid maroon;"></td>
+            <td class="ytd" colspan="5" style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center; color: maroon; border-bottom: 2px solid maroon; text-align: left; padding: 5px;  font-family: -apple-system; font-weight: 400; display: table-cell;vertical-align: inherit;   box-sizing: border-box;  border-collapse: collapse;">
+
+                <strong></strong>
+            </td>
+            <td style="background:  white;   padding: 5px; font-weight: bold; text-align: center;"></td>
+        </tr>
+                <br />
+        IList<decimal> totalTotal = new List<decimal>();
+        IList<decimal> total = new List<decimal>();
+        @foreach (var load in Model.TotalRevenue)
+                {
+
+
+            @if (loadCategory == load.LoadCategory)
+                    {
+                        total.Add(load.Amount);
+                <tr>
+                    <td class="=left">Uncategorized</td>
+                    <td></td>
+                    <td sstyle="padding: 5px;"></td>
+                    <td style="background: white;    padding: 5px; text-align: center;">@load.Amount</td>
+                    <td style="background: white;    padding: 5px;  text-align: center;">@load.Amount</td>
+                    <td style="background: white;    padding: 5px;  text-align: center;">@load.Amount</td>
+
+                    <td class="=ytd" style="background: #EEE;    padding: 5px;  text-align: center;">@load.Amount</td>
+                    <td class="=ytd" style="background: #EEE;    padding: 5px;  text-align: center;">@load.Amount</td>
+                    <td class="=ytd" style="background: #EEE;    padding: 5px; bold; text-align: center;">@load.Amount</td>
+                    <td class="=ytd" style="background: #EEE;    padding: 5px;  text-align: center;"></td>
+                    <td class="=ytd" style="background: #EEE;    padding: 5px;  text-align: center;"></td>
+                </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="5" style="background:  white;   padding: 5px; font-weight: bold; text-align: center; "></td>
+                            <td colspan="5" class="ytd" style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;"></td>
+                        </tr>
+            }
+
+
+        }
+        @*totalTotal.Add(total.Sum());
+            <td> @totalTotal</td>*@
+
+        <tr>
+            <td class="left"> <strong>Revenue Totals</strong></td>
+            <td></td>
+            <td style="padding-left: 35px;"></td>
+            <td class="total" style=" padding: 5px; text-align: center; border-top: 2px solid #326835; border-bottom: 2px solid #326835;"> <strong>@total.Sum()</strong></td>
+            <td class="total" style=" padding: 5px; text-align: center;"> <strong>@total.Sum()</strong></td>
+            <td class="total" style=" padding: 5px; text-align: center;"> <strong>@total.Sum()</strong></td>
+
+            <td class="ytd" style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;  border-top: 2px solid #326835;  border-bottom: 2px solid #326835; "> <strong>@total.Sum()</strong></td>
+            <td class="ytd" style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;  "> <strong>@total.Sum()</strong></td>
+            <td class="ytd" style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center; "> <strong>@total.Sum()</strong></td>
+            <td class="=ytd" style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;"></td>
+            <td class="=ytd" style="background: #EEE;    padding: 5px; font-weight: bold; text-align: center;"></td>
+        </tr>
+
+        ////Console.WriteLine("");
+
+    }
+
+
+</table>

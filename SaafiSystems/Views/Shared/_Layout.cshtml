@@ -68,9 +68,10 @@
                 <ul class="nav navbar-nav">
 
                     <li><a asp-controller="Load" asp-action="Add">Add Trip</a></li>
-                    <li><a asp-controller="Remove" asp-action="Index">Remove</a></li>
+                    <li><a asp-controller="Load" asp-action="Index">Remove</a></li>
                     <li><a asp-controller="Revenue" asp-action="Index">Revenue</a></li>  
                     <li><a asp-controller="Expense" asp-action="Index">Expense</a></li>
+                    <li><a asp-controller="Reports" asp-action="Index">Reports</a></li>
                 </ul>
                <ul class="nav navbar-nav navbar-right"><li>@await Html.PartialAsync("_LoginPartial")</li></ul> 
             </div>

@@ -126,17 +126,40 @@ namespace SaafiSystems.Controllers
             };
    
             return View(viewModel);
-            // ViewBag.Title = "Expenses in Category" + theCategory.Name;
-
-            //var theCategorys = from eCat in context.ExpenseCategories.Include(cat => cat.Expenses)
-
-            //                   select eCat;
-            // return View(await PaginatedList<ExpenseCategory>.CreateAsync(theCategorys.AsNoTracking(), page ?? 1, pageSize));
+            ViewBag.Title = "Expenses in Category";
 
             int pageSize = 3;
 
         }
+        public async Task<IActionResult> Revenue(int? page)
+        {
+            IList<Load> totalRevenue = new List<Load>();
+            List<Load> loadItems = context.
+               Loads
+               .Include(item => item.LoadCategory)
+               .ToList();
+            IList<LoadCategory> loadCategories = context.LoadCategories.ToList();
 
+            foreach (var item in loadItems)
+            {
+
+                totalRevenue.Add(item);
+
+            };
+            RevenueReportViewModel viewModel = new RevenueReportViewModel
+            {
+
+                LoadCategories = loadCategories,
+                Loads = loadItems,
+                TotalRevenue = totalRevenue
+            };
+
+            return View(viewModel);
+            ViewBag.Title = "Revenue by Category";
+
+            int pageSize = 3;
+
+        }
     }
 }
 
